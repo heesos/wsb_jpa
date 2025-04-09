@@ -21,6 +21,7 @@ public class PatientMapper {
         patientTO.setDateOfBirth(patientEntity.getDateOfBirth());
         patientTO.setAddressList(patientEntity.getAddressList());
         patientTO.setVisitList(patientEntity.getVisitList().stream().map(VisitMapper::mapToTO).toList());
+        patientTO.setHeight(patientEntity.getHeight());
 
         return patientTO;
     }

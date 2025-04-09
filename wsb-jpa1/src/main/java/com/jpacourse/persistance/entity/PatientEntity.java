@@ -39,6 +39,17 @@ public class PatientEntity {
 	@OneToMany(mappedBy = "patient")
 	private List<VisitEntity> visitList;
 
+	@Column
+	private double height;
+
+	public double getHeight() {
+		return height;
+	}
+
+	public void setHeight(double height) {
+		this.height = height;
+	}
+
 	public List<VisitEntity> getVisitList() {
 		return visitList;
 	}

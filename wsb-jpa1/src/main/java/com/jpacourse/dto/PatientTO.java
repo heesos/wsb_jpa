@@ -26,6 +26,16 @@ public class PatientTO implements Serializable {
 
     private List<VisitTO> visitList;
 
+    private double height;
+
+    public double getHeight() {
+        return height;
+    }
+
+    public void setHeight(double height) {
+        this.height = height;
+    }
+
     public Long getId() {
         return id;
     }
