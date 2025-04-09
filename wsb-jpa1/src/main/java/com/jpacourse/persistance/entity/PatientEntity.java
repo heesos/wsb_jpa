@@ -40,13 +40,13 @@ public class PatientEntity {
 	private List<VisitEntity> visitList;
 
 	@Column
-	private double height;
+	private Float height;
 
-	public double getHeight() {
+	public Float getHeight() {
 		return height;
 	}
 
-	public void setHeight(double height) {
+	public void setHeight(Float height) {
 		this.height = height;
 	}
 

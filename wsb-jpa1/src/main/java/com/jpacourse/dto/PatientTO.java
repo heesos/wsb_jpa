@@ -26,13 +26,13 @@ public class PatientTO implements Serializable {
 
     private List<VisitTO> visitList;
 
-    private double height;
+    private Float height;
 
-    public double getHeight() {
+    public Float getHeight() {
         return height;
     }
 
-    public void setHeight(double height) {
+    public void setHeight(Float height) {
         this.height = height;
     }
 

@@ -34,6 +34,7 @@ INSERT INTO address (doctor_id, patient_id, address_line1, address_line2, city, 
 -- Insert into visit
 INSERT INTO visit (doctor_id, patient_id, time, description) VALUES
 (1, 1, '2024-02-20 10:00:00', 'Kontrolna wizyta u GP'),
+(3, 1, '2026-02-20 10:00:00', 'Konsultacja chirurgiczna'),
 (2, 2, '2024-02-21 14:30:00', 'Konsultacja dermatologiczna'),
 (3, 3, '2024-02-22 09:15:00', 'Konsultacja chirurgiczna'),
 (4, 4, '2024-02-23 11:45:00', 'Badanie okulistyczne'),
