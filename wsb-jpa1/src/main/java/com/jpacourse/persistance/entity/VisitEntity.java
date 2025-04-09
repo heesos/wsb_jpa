@@ -23,11 +23,11 @@ public class VisitEntity {
     private List<MedicalTreatmentEntity> medicalTreatmentList;
 
     //bidirectional
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private DoctorEntity doctor;
 
     //bidirectional
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private PatientEntity patient;
 
     public List<MedicalTreatmentEntity> getMedicalTreatmentList() {
