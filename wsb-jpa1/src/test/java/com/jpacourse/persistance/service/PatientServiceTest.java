@@ -3,6 +3,7 @@ package com.jpacourse.persistance.service;
 import com.jpacourse.dto.DoctorTO;
 import com.jpacourse.dto.PatientTO;
 import com.jpacourse.dto.VisitTO;
+import com.jpacourse.persistance.dao.DoctorDao;
 import com.jpacourse.persistance.dao.VisitDao;
 import com.jpacourse.persistance.enums.Specialization;
 import com.jpacourse.persistance.enums.TreatmentType;
@@ -27,6 +28,9 @@ public class PatientServiceTest {
 
     @Autowired
     private VisitDao visitDao;
+
+    @Autowired
+    private DoctorDao doctorDao;
 
     @Transactional
     @Test
@@ -58,7 +62,7 @@ public class PatientServiceTest {
 
         PatientTO patientTO = new PatientTO();
         patientTO.setId(patientID);
-        patientTO.setHeight(null);
+        patientTO.setHeight(184.2);
         patientTO.setPatientNumber("P1002");
         patientTO.setVisitList(visitTOList);
         patientTO.setEmail("patient2@example.com");
@@ -96,5 +100,9 @@ public class PatientServiceTest {
         long patientVisits = 2;
         long visitCounterAfterDelete = visitDao.count(); //should be 7
         assertThat(visitCounterAfterDelete).isEqualTo(visitCounter - patientVisits);
+
+        //check if Doctors remain in the database
+        assertThat(doctorDao.exists(1L)).isTrue();
+        assertThat(doctorDao.exists(3L)).isTrue();
     }
 }
