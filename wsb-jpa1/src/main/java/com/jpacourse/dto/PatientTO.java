@@ -1,45 +1,27 @@
-package com.jpacourse.persistance.entity;
+package com.jpacourse.dto;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 
-import jakarta.persistence.*;
-
-@Entity
-@Table(name = "PATIENT")
-public class PatientEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class PatientTO implements Serializable {
     private Long id;
 
-    @Column(nullable = false)
     private String firstName;
 
-    @Column(nullable = false)
     private String lastName;
 
-    @Column(nullable = false)
     private String telephoneNumber;
 
     private String email;
 
-    @Column(nullable = false)
     private String patientNumber;
 
-    @Column(nullable = false)
     private LocalDate dateOfBirth;
 
-    //unidirectional from parent's end
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "patient_id")
-    private List<AddressEntity> addressList;
+    private List<VisitTO> visitList;
 
-    //bidirectional
-    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
-    private List<VisitEntity> visitList;
-
-    @Column
     private Double height;
 
     public Double getHeight() {
@@ -48,14 +30,6 @@ public class PatientEntity {
 
     public void setHeight(Double height) {
         this.height = height;
-    }
-
-    public List<VisitEntity> getVisitList() {
-        return visitList;
-    }
-
-    public void setVisitList(List<VisitEntity> visitList) {
-        this.visitList = visitList;
     }
 
     public Long getId() {
@@ -114,11 +88,24 @@ public class PatientEntity {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public List<AddressEntity> getAddressList() {
-        return addressList;
+    public List<VisitTO> getVisitList() {
+        return visitList;
     }
 
-    public void setAddressList(List<AddressEntity> addressList) {
-        this.addressList = addressList;
+    public void setVisitList(List<VisitTO> visitList) {
+        this.visitList = visitList;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PatientTO patientTO = (PatientTO) o;
+        return Objects.equals(id, patientTO.id) && Objects.equals(firstName, patientTO.firstName) && Objects.equals(lastName, patientTO.lastName) && Objects.equals(telephoneNumber, patientTO.telephoneNumber) && Objects.equals(email, patientTO.email) && Objects.equals(patientNumber, patientTO.patientNumber) && Objects.equals(dateOfBirth, patientTO.dateOfBirth) && Objects.equals(visitList, patientTO.visitList) && Objects.equals(height, patientTO.height);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, firstName, lastName, telephoneNumber, email, patientNumber, dateOfBirth, visitList, height);
     }
 }
