@@ -9,116 +9,116 @@ import jakarta.persistence.*;
 @Table(name = "PATIENT")
 public class PatientEntity {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@Column(nullable = false)
-	private String firstName;
+    @Column(nullable = false)
+    private String firstName;
 
-	@Column(nullable = false)
-	private String lastName;
+    @Column(nullable = false)
+    private String lastName;
 
-	@Column(nullable = false)
-	private String telephoneNumber;
+    @Column(nullable = false)
+    private String telephoneNumber;
 
-	private String email;
+    private String email;
 
-	@Column(nullable = false)
-	private String patientNumber;
+    @Column(nullable = false)
+    private String patientNumber;
 
-	@Column(nullable = false)
-	private LocalDate dateOfBirth;
+    @Column(nullable = false)
+    private LocalDate dateOfBirth;
 
-	//unidirectional from parent's end
-	@OneToMany(fetch = FetchType.LAZY)
-	@JoinColumn(name = "patient_id")
-	private List<AddressEntity> addressList;
+    //unidirectional from parent's end
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "patient_id")
+    private List<AddressEntity> addressList;
 
-	//bidirectional
-	@OneToMany(mappedBy = "patient")
-	private List<VisitEntity> visitList;
+    //bidirectional
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
+    private List<VisitEntity> visitList;
 
-	@Column
-	private Float height;
+    @Column
+    private Double height;
 
-	public Float getHeight() {
-		return height;
-	}
+    public Double getHeight() {
+        return height;
+    }
 
-	public void setHeight(Float height) {
-		this.height = height;
-	}
+    public void setHeight(Double height) {
+        this.height = height;
+    }
 
-	public List<VisitEntity> getVisitList() {
-		return visitList;
-	}
+    public List<VisitEntity> getVisitList() {
+        return visitList;
+    }
 
-	public void setVisitList(List<VisitEntity> visitList) {
-		this.visitList = visitList;
-	}
+    public void setVisitList(List<VisitEntity> visitList) {
+        this.visitList = visitList;
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public String getFirstName() {
-		return firstName;
-	}
+    public String getFirstName() {
+        return firstName;
+    }
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
-	public String getLastName() {
-		return lastName;
-	}
+    public String getLastName() {
+        return lastName;
+    }
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
-	public String getTelephoneNumber() {
-		return telephoneNumber;
-	}
+    public String getTelephoneNumber() {
+        return telephoneNumber;
+    }
 
-	public void setTelephoneNumber(String telephoneNumber) {
-		this.telephoneNumber = telephoneNumber;
-	}
+    public void setTelephoneNumber(String telephoneNumber) {
+        this.telephoneNumber = telephoneNumber;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public String getPatientNumber() {
-		return patientNumber;
-	}
+    public String getPatientNumber() {
+        return patientNumber;
+    }
 
-	public void setPatientNumber(String patientNumber) {
-		this.patientNumber = patientNumber;
-	}
+    public void setPatientNumber(String patientNumber) {
+        this.patientNumber = patientNumber;
+    }
 
-	public LocalDate getDateOfBirth() {
-		return dateOfBirth;
-	}
+    public LocalDate getDateOfBirth() {
+        return dateOfBirth;
+    }
 
-	public void setDateOfBirth(LocalDate dateOfBirth) {
-		this.dateOfBirth = dateOfBirth;
-	}
+    public void setDateOfBirth(LocalDate dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
 
-	public List<AddressEntity> getAddressList() {
-		return addressList;
-	}
+    public List<AddressEntity> getAddressList() {
+        return addressList;
+    }
 
-	public void setAddressList(List<AddressEntity> addressList) {
-		this.addressList = addressList;
-	}
+    public void setAddressList(List<AddressEntity> addressList) {
+        this.addressList = addressList;
+    }
 }

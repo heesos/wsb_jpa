@@ -2,6 +2,7 @@ package com.jpacourse.persistance.entity;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 import jakarta.persistence.*;
 
@@ -18,15 +19,15 @@ public class VisitEntity {
     @Column(nullable = false)
     private LocalDateTime time;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "visit_id", nullable = false)
     private List<MedicalTreatmentEntity> medicalTreatmentList;
 
-    //bidirectional
+    //bidirectional (owner's side)
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private DoctorEntity doctor;
 
-    //bidirectional
+    //bidirectional (owner's side)
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private PatientEntity patient;
 

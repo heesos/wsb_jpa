@@ -2,7 +2,6 @@ package com.jpacourse.mapper;
 
 import com.jpacourse.dto.PatientTO;
 import com.jpacourse.persistance.entity.PatientEntity;
-import com.jpacourse.persistance.entity.VisitEntity;
 
 public class PatientMapper {
 
@@ -19,7 +18,6 @@ public class PatientMapper {
         patientTO.setEmail(patientEntity.getEmail());
         patientTO.setPatientNumber(patientEntity.getPatientNumber());
         patientTO.setDateOfBirth(patientEntity.getDateOfBirth());
-        patientTO.setAddressList(patientEntity.getAddressList());
         patientTO.setVisitList(patientEntity.getVisitList().stream().map(VisitMapper::mapToTO).toList());
         patientTO.setHeight(patientEntity.getHeight());
 

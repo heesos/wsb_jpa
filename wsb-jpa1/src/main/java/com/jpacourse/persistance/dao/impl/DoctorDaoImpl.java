@@ -1,11 +1,13 @@
 package com.jpacourse.persistance.dao.impl;
 
 import com.jpacourse.persistance.dao.AddressDao;
+import com.jpacourse.persistance.dao.DoctorDao;
 import com.jpacourse.persistance.entity.AddressEntity;
+import com.jpacourse.persistance.entity.DoctorEntity;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class AddressDaoImpl extends AbstractDao<AddressEntity, Long> implements AddressDao
+public class DoctorDaoImpl extends AbstractDao<DoctorEntity, Long> implements DoctorDao
 {
 
 }

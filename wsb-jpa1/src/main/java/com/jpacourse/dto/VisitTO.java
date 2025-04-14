@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 public class VisitTO {
     private Long id;
@@ -14,7 +15,7 @@ public class VisitTO {
 
     private LocalDateTime time;
 
-    private List<MedicalTreatmentEntity> medicalTreatmentList;
+    private List<String> medicalTreatmentList;
 
     private DoctorTO doctor;
 
@@ -42,11 +43,11 @@ public class VisitTO {
         this.time = time;
     }
 
-    public List<MedicalTreatmentEntity> getMedicalTreatmentList() {
+    public List<String> getMedicalTreatmentList() {
         return medicalTreatmentList;
     }
 
-    public void setMedicalTreatmentList(List<MedicalTreatmentEntity> medicalTreatmentList) {
+    public void setMedicalTreatmentList(List<String> medicalTreatmentList) {
         this.medicalTreatmentList = medicalTreatmentList;
     }
 
@@ -56,5 +57,18 @@ public class VisitTO {
 
     public void setDoctor(DoctorTO doctor) {
         this.doctor = doctor;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        VisitTO visitTO = (VisitTO) o;
+        return Objects.equals(id, visitTO.id) && Objects.equals(description, visitTO.description) && Objects.equals(time, visitTO.time) && Objects.equals(medicalTreatmentList, visitTO.medicalTreatmentList) && Objects.equals(doctor, visitTO.doctor);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, description, time, medicalTreatmentList, doctor);
     }
 }

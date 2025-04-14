@@ -1,11 +1,9 @@
 package com.jpacourse.dto;
 
-import com.jpacourse.persistance.entity.AddressEntity;
-import com.jpacourse.persistance.entity.VisitEntity;
-
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 
 public class PatientTO implements Serializable {
     private Long id;
@@ -22,17 +20,15 @@ public class PatientTO implements Serializable {
 
     private LocalDate dateOfBirth;
 
-    private List<AddressEntity> addressList;
-
     private List<VisitTO> visitList;
 
-    private Float height;
+    private Double height;
 
-    public Float getHeight() {
+    public Double getHeight() {
         return height;
     }
 
-    public void setHeight(Float height) {
+    public void setHeight(Double height) {
         this.height = height;
     }
 
@@ -92,19 +88,24 @@ public class PatientTO implements Serializable {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public List<AddressEntity> getAddressList() {
-        return addressList;
-    }
-
-    public void setAddressList(List<AddressEntity> addressList) {
-        this.addressList = addressList;
-    }
-
     public List<VisitTO> getVisitList() {
         return visitList;
     }
 
     public void setVisitList(List<VisitTO> visitList) {
         this.visitList = visitList;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PatientTO patientTO = (PatientTO) o;
+        return Objects.equals(id, patientTO.id) && Objects.equals(firstName, patientTO.firstName) && Objects.equals(lastName, patientTO.lastName) && Objects.equals(telephoneNumber, patientTO.telephoneNumber) && Objects.equals(email, patientTO.email) && Objects.equals(patientNumber, patientTO.patientNumber) && Objects.equals(dateOfBirth, patientTO.dateOfBirth) && Objects.equals(visitList, patientTO.visitList) && Objects.equals(height, patientTO.height);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, firstName, lastName, telephoneNumber, email, patientNumber, dateOfBirth, visitList, height);
     }
 }

@@ -26,10 +26,23 @@ public class PatientServiceImpl implements PatientService {
     @Override
     public PatientTO findById(Long id) {
         PatientEntity patientEntity = patientDao.findOne(id);
-        // filter out future visits
-        patientEntity.setVisitList(patientEntity.getVisitList().stream()
-                .filter(visitEntity -> visitEntity.getTime().isBefore(LocalDateTime.now()))
+        if (patientEntity == null) {
+            return null;
+        }
+        PatientTO patientTO = PatientMapper.mapToTo(patientEntity);
+
+        //Filtering out values on the DTO level rather than Entity level so visits are not removed from the DB
+        patientTO.setVisitList(patientTO.getVisitList().stream()
+                .filter(visitTO -> visitTO.getTime().isBefore(LocalDateTime.now()))
                 .collect(Collectors.toList()));
-        return PatientMapper.mapToTo(patientEntity);
+        return patientTO;
+    }
+
+    @Override
+    public void removeById(Long id) {
+        if (!patientDao.exists(id)) {
+            return;
+        }
+        patientDao.delete(id);
     }
 }

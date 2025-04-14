@@ -1,10 +1,8 @@
 package com.jpacourse.dto;
 
-import com.jpacourse.persistance.entity.AddressEntity;
 import com.jpacourse.persistance.enums.Specialization;
-import jakarta.persistence.*;
 
-import java.util.List;
+import java.util.Objects;
 
 public class DoctorTO {
     private Long id;
@@ -18,8 +16,6 @@ public class DoctorTO {
     private String doctorNumber;
 
     private Specialization specialization;
-
-    private List<AddressEntity> addressList;
 
     public Long getId() {
         return id;
@@ -77,11 +73,16 @@ public class DoctorTO {
         this.specialization = specialization;
     }
 
-    public List<AddressEntity> getAddressList() {
-        return addressList;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        DoctorTO doctorTO = (DoctorTO) o;
+        return Objects.equals(id, doctorTO.id) && Objects.equals(firstName, doctorTO.firstName) && Objects.equals(lastName, doctorTO.lastName) && Objects.equals(telephoneNumber, doctorTO.telephoneNumber) && Objects.equals(email, doctorTO.email) && Objects.equals(doctorNumber, doctorTO.doctorNumber) && specialization == doctorTO.specialization;
     }
 
-    public void setAddressList(List<AddressEntity> addressList) {
-        this.addressList = addressList;
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, firstName, lastName, telephoneNumber, email, doctorNumber, specialization);
     }
 }

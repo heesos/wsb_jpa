@@ -12,7 +12,6 @@ public class DoctorMapper {
         DoctorTO doctorTO = new DoctorTO();
         doctorTO.setId(doctor.getId());
         doctorTO.setDoctorNumber(doctor.getDoctorNumber());
-        doctorTO.setAddressList(doctor.getAddressList());
         doctorTO.setEmail(doctor.getEmail());
         doctorTO.setFirstName(doctor.getFirstName());
         doctorTO.setLastName(doctor.getLastName());
