@@ -7,6 +7,7 @@ import com.jpacourse.persistance.entity.MedicalTreatmentEntity;
 import com.jpacourse.persistance.entity.PatientEntity;
 import com.jpacourse.persistance.entity.VisitEntity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
@@ -33,5 +34,24 @@ public class PatientDaoImpl extends AbstractDao<PatientEntity, Long> implements 
         patient.getVisitList().add(visit);
 
         return update(patient);
+    }
+
+    @Override
+    public List<PatientEntity> findPatientsBySurname(String lastName) {
+        return entityManager.createQuery(
+                        "SELECT p FROM PatientEntity p WHERE p.lastName = :lastName", PatientEntity.class)
+                .setParameter("lastName", lastName)
+                .getResultList();
+    }
+
+    @Override
+    public List<PatientEntity> findPatientsWithMoreThanXFinishedVisits(int numberOfVisits) {
+        LocalDateTime timeNow = LocalDateTime.now();
+        return entityManager.createQuery("SELECT p FROM PatientEntity p" +
+                        " WHERE (SELECT count(v) FROM VisitEntity v WHERE v.time < :time and v.patient.id=p.id)" +
+                        ">:numberOfVisits", PatientEntity.class)
+                .setParameter("numberOfVisits", numberOfVisits)
+                .setParameter("time",timeNow)
+                .getResultList();
     }
 }

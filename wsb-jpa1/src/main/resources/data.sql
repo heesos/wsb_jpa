@@ -14,7 +14,7 @@ INSERT INTO patient (date_of_birth, email, first_name, last_name, patient_number
 ('1985-06-15', 'patient1@example.com', 'Marek', 'Wiśniewski', 'P1001', '111222333', 175.4),
 ('1992-09-23', 'patient2@example.com', 'Ewa', 'Kaczmarek', 'P1002', '444555666', 184.2),
 ('2000-01-05', 'patient3@example.com', 'Tomasz', 'Lis', 'P1003', '777888999', 150),
-('1978-04-12', 'patient4@example.com', 'Paweł', 'Dąbrowski', 'P1004', '333444555', 190.9),
+('1978-04-12', 'patient4@example.com', 'Paweł', 'Kaczmarek', 'P1004', '333444555', 190.9),
 ('1989-11-30', 'patient5@example.com', 'Katarzyna', 'Mazur', 'P1005', '555666777', 188.8),
 ('1995-07-21', 'patient6@example.com', 'Dominik', 'Szymański', 'P1006', '888999000', 167),
 ('1983-02-08', 'patient7@example.com', 'Aleksandra', 'Kowalczyk', 'P1007', '222333444', 176),
@@ -40,7 +40,7 @@ INSERT INTO visit (doctor_id, patient_id, time, description) VALUES
 (4, 4, '2024-02-23 11:45:00', 'Badanie okulistyczne'),
 (5, 5, '2024-02-24 08:30:00', 'Porada lekarza rodzinnego'),
 (6, 6, '2024-02-25 16:00:00', 'Wizyta kontrolna u dermatologa'),
-(7, 7, '2024-02-26 12:15:00', 'Konsultacja chirurga'),
+(7, 8, '2024-02-26 12:15:00', 'Konsultacja chirurga'),
 (8, 8, '2024-02-27 15:45:00', 'Wizyta okulistyczna');
 
 -- Insert into medical_treatment

@@ -8,4 +8,8 @@ import java.util.List;
 
 public interface PatientDao extends Dao<PatientEntity, Long> {
     PatientEntity addVisit(long patientId, long doctorId, LocalDateTime visitTime, List<MedicalTreatmentEntity> medicalTreatmentEntityList, String description);
+
+    List<PatientEntity> findPatientsBySurname(String surname);
+
+    List<PatientEntity> findPatientsWithMoreThanXFinishedVisits(int numberOfVisits);
 }

@@ -1,6 +1,7 @@
 package com.jpacourse.persistance.dao;
 
 import com.jpacourse.persistance.entity.MedicalTreatmentEntity;
+import com.jpacourse.persistance.entity.PatientEntity;
 import com.jpacourse.persistance.enums.TreatmentType;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,5 +40,32 @@ public class PatientDaoTest {
         //then
         long newNumberOfVisits = visitDao.count(); //should return 10
         assertThat(newNumberOfVisits).isEqualTo(numberOfVisits + 1);
+    }
+
+    @Transactional
+    @Test
+    public void findPatientsByLastNameTest() {
+        //given
+        String lastName = "Kaczmarek";
+
+        //when
+        List<PatientEntity> patientEntityList = patientDao.findPatientsBySurname(lastName);
+
+        //then
+        assertThat(patientEntityList.size()).isEqualTo(2);
+    }
+
+    @Transactional
+    @Test
+    public void findPatientsWithMoreThanXFinishedVisitsTest() {
+        //given
+        int numberOfVisits = 1;
+
+        //when
+        List<PatientEntity> patientEntityList = patientDao.findPatientsWithMoreThanXFinishedVisits(numberOfVisits);
+
+        //then
+        assertThat(patientEntityList.size()).isEqualTo(1); //one patient with two visits
+
     }
 }
