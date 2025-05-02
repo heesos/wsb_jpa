@@ -86,6 +86,12 @@ public abstract class AbstractDao<T, K extends Serializable> implements Dao<T, K
 		return domainClass;
 	}
 
+	@Override
+	public T saveAndFlush(T entity) {
+		entityManager.persist(entity);
+		entityManager.flush();
+		return entity;
+	}
 	protected String getDomainClassName() {
 		return getDomainClass().getName();
 	}

@@ -63,7 +63,6 @@ public class PatientDaoTest {
 
         //when
         List<PatientEntity> patientEntityList = patientDao.findPatientsWithMoreThanXHeight(height);
-
         //then
         assertThat(patientEntityList.size()).isEqualTo(3); //three patients with more than 184.1 height
     }
