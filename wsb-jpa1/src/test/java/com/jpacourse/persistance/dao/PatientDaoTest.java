@@ -57,15 +57,14 @@ public class PatientDaoTest {
 
     @Transactional
     @Test
-    public void findPatientsWithMoreThanXFinishedVisitsTest() {
+    public void findPatientsWithMoreThanXHeightTest() {
         //given
-        int numberOfVisits = 1;
+        double height = 184.1;
 
         //when
-        List<PatientEntity> patientEntityList = patientDao.findPatientsWithMoreThanXFinishedVisits(numberOfVisits);
+        List<PatientEntity> patientEntityList = patientDao.findPatientsWithMoreThanXHeight(height);
 
         //then
-        assertThat(patientEntityList.size()).isEqualTo(1); //one patient with two visits
-
+        assertThat(patientEntityList.size()).isEqualTo(3); //three patients with more than 184.1 height
     }
 }

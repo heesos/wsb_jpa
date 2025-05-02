@@ -7,7 +7,6 @@ import com.jpacourse.persistance.entity.MedicalTreatmentEntity;
 import com.jpacourse.persistance.entity.PatientEntity;
 import com.jpacourse.persistance.entity.VisitEntity;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
@@ -52,6 +51,13 @@ public class PatientDaoImpl extends AbstractDao<PatientEntity, Long> implements 
                         ">:numberOfVisits", PatientEntity.class)
                 .setParameter("numberOfVisits", numberOfVisits)
                 .setParameter("time",timeNow)
+                .getResultList();
+    }
+
+    @Override
+    public List<PatientEntity> findPatientsWithMoreThanXHeight(double height) {
+        return entityManager.createQuery("SELECT p FROM PatientEntity p WHERE p.height >=:height")
+                .setParameter("height",height)
                 .getResultList();
     }
 }

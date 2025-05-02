@@ -8,6 +8,7 @@ import com.jpacourse.persistance.dao.VisitDao;
 import com.jpacourse.persistance.enums.Specialization;
 import com.jpacourse.persistance.enums.TreatmentType;
 import com.jpacourse.service.PatientService;
+import org.assertj.core.api.AssertionsForClassTypes;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -105,4 +106,17 @@ public class PatientServiceTest {
         assertThat(doctorDao.exists(1L)).isTrue();
         assertThat(doctorDao.exists(3L)).isTrue();
     }
+
+    @Transactional
+    @Test
+    public void findPatientsWithMoreThanXFinishedVisitsTest() {
+        //given
+        int numberOfVisits = 1;
+        //when
+        List<PatientTO> patientEntityList = patientService.findPatientsWithMoreThanXFinishedVisits(numberOfVisits);
+
+        //then
+        AssertionsForClassTypes.assertThat(patientEntityList.size()).isEqualTo(1); //one patient with two visits
+    }
+
 }

@@ -1,13 +1,13 @@
 -- Insert into doctor
-INSERT INTO doctor (doctor_number, email, first_name, last_name, telephone_number, specialization) VALUES
-('D10001', 'doc1@example.com', 'Jan', 'Kowalski', '123456789', 'GP'),
-('D10002', 'doc2@example.com', 'Anna', 'Nowak', '987654321', 'DERMATOLOGIST'),
-('D10003', 'doc3@example.com', 'Piotr', 'Wójcik', '654321987', 'SURGEON'),
-('D10004', 'doc4@example.com', 'Marek', 'Lis', '111222333', 'OCULIST'),
-('D10005', 'doc5@example.com', 'Ewa', 'Kaczmarek', '444555666', 'GP'),
-('D10006', 'doc6@example.com', 'Tomasz', 'Zieliński', '777888999', 'DERMATOLOGIST'),
-('D10007', 'doc7@example.com', 'Karolina', 'Jankowska', '999888777', 'SURGEON'),
-('D10008', 'doc8@example.com', 'Adam', 'Lewandowski', '666555444', 'OCULIST');
+INSERT INTO doctor (doctor_number, email, first_name, last_name, telephone_number, specialization, version) VALUES
+('D10001', 'doc1@example.com', 'Jan', 'Kowalski', '123456789', 'GP',0),
+('D10002', 'doc2@example.com', 'Anna', 'Nowak', '987654321', 'DERMATOLOGIST',0),
+('D10003', 'doc3@example.com', 'Piotr', 'Wójcik', '654321987', 'SURGEON',0),
+('D10004', 'doc4@example.com', 'Marek', 'Lis', '111222333', 'OCULIST',0),
+('D10005', 'doc5@example.com', 'Ewa', 'Kaczmarek', '444555666', 'GP',0),
+('D10006', 'doc6@example.com', 'Tomasz', 'Zieliński', '777888999', 'DERMATOLOGIST',0),
+('D10007', 'doc7@example.com', 'Karolina', 'Jankowska', '999888777', 'SURGEON',0),
+('D10008', 'doc8@example.com', 'Adam', 'Lewandowski', '666555444', 'OCULIST',0);
 
 -- Insert into patient
 INSERT INTO patient (date_of_birth, email, first_name, last_name, patient_number, telephone_number, height) VALUES

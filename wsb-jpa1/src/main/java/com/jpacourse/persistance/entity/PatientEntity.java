@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Entity
 @Table(name = "PATIENT")
@@ -37,6 +39,7 @@ public class PatientEntity {
 
     //bidirectional
     @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
+    @Fetch(FetchMode.JOIN)
     private List<VisitEntity> visitList;
 
     @Column
@@ -122,3 +125,28 @@ public class PatientEntity {
         this.addressList = addressList;
     }
 }
+/**
+ * Hibernate: select pe1_0.id,pe1_0.date_of_birth,pe1_0.email,pe1_0.first_name,pe1_0.height,pe1_0.last_name,pe1_0.patient_number,pe1_0.telephone_number from patient pe1_0 where (select count(ve1_0.id) from visit ve1_0 where ve1_0.time<? and ve1_0.patient_id=pe1_0.id)>?
+ * Hibernate: select vl1_0.patient_id,vl1_0.id,vl1_0.description,vl1_0.doctor_id,vl1_0.time from visit vl1_0 where vl1_0.patient_id=?
+ * Hibernate: select de1_0.id,de1_0.doctor_number,de1_0.email,de1_0.first_name,de1_0.last_name,de1_0.specialization,de1_0.telephone_number from doctor de1_0 where de1_0.id=?
+ * Hibernate: select mtl1_0.visit_id,mtl1_0.id,mtl1_0.description,mtl1_0.type from medical_treatment mtl1_0 where mtl1_0.visit_id=?
+ * Hibernate: select de1_0.id,de1_0.doctor_number,de1_0.email,de1_0.first_name,de1_0.last_name,de1_0.specialization,de1_0.telephone_number from doctor de1_0 where de1_0.id=?
+ * Hibernate: select mtl1_0.visit_id,mtl1_0.id,mtl1_0.description,mtl1_0.type from medical_treatment mtl1_0 where mtl1_0.visit_id=?
+ ^^ when using FetchMode.SELECT
+
+
+ OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
+ Hibernate: select pe1_0.id,pe1_0.date_of_birth,pe1_0.email,pe1_0.first_name,pe1_0.height,pe1_0.last_name,pe1_0.patient_number,pe1_0.telephone_number from patient pe1_0 where (select count(ve1_0.id) from visit ve1_0 where ve1_0.time<? and ve1_0.patient_id=pe1_0.id)>?
+ Hibernate: select vl1_0.patient_id,vl1_0.id,vl1_0.description,vl1_0.doctor_id,vl1_0.time from visit vl1_0 where vl1_0.patient_id=?
+ Hibernate: select de1_0.id,de1_0.doctor_number,de1_0.email,de1_0.first_name,de1_0.last_name,de1_0.specialization,de1_0.telephone_number from doctor de1_0 where de1_0.id=?
+ Hibernate: select mtl1_0.visit_id,mtl1_0.id,mtl1_0.description,mtl1_0.type from medical_treatment mtl1_0 where mtl1_0.visit_id=?
+ Hibernate: select de1_0.id,de1_0.doctor_number,de1_0.email,de1_0.first_name,de1_0.last_name,de1_0.specialization,de1_0.telephone_number from doctor de1_0 where de1_0.id=?
+ Hibernate: select mtl1_0.visit_id,mtl1_0.id,mtl1_0.description,mtl1_0.type from medical_treatment mtl1_0 where mtl1_0.visit_id=?
+
+ ^^ when using FetchMode.JOIN
+
+ SELECT mean that entities are queried in lazy mode. Each relation is subquered by another select query.
+ Another visit for patient is another select in the hibernate.
+
+ JOIN loads data eagerly. It's good for relations entities. Fewer queries. Better performance.
+ */

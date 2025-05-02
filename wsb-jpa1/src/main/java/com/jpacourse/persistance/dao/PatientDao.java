@@ -12,4 +12,6 @@ public interface PatientDao extends Dao<PatientEntity, Long> {
     List<PatientEntity> findPatientsBySurname(String surname);
 
     List<PatientEntity> findPatientsWithMoreThanXFinishedVisits(int numberOfVisits);
+
+    List<PatientEntity> findPatientsWithMoreThanXHeight(double height);
 }

@@ -40,6 +40,9 @@ public class DoctorEntity {
 	@OneToMany(mappedBy = "doctor")
 	private List<VisitEntity> visitList;
 
+	@Version
+	private long version;
+
 	//bidirectional
 	public List<VisitEntity> getVisitList() {
 		return visitList;

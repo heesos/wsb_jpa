@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -44,5 +45,15 @@ public class PatientServiceImpl implements PatientService {
             return;
         }
         patientDao.delete(id);
+    }
+
+    @Override
+    public List<PatientTO> findPatientsWithMoreThanXFinishedVisits(int visits) {
+        List<PatientTO> patientTOList = patientDao.findPatientsWithMoreThanXFinishedVisits(visits)
+                .stream().map(PatientMapper::mapToTo).toList();
+        if (patientTOList.size()==0) {
+            return null;
+        }
+        return patientTOList;
     }
 }
